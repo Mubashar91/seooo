@@ -737,16 +737,23 @@ const BlogDetail = () => {
           <article className="max-w-4xl mx-auto">
             {/* Hero Image */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              whileHover={{ y: -4, scale: 1.01 }}
               className="relative mb-6 sm:mb-8 rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl group"
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+              {/* Outer glow */}
+              <div className="pointer-events-none absolute -inset-px rounded-[inherit] bg-gradient-to-r from-sky-500/40 via-gold/40 to-purple-500/40 opacity-40 blur-xl" />
+
+              {/* Image gradient overlay */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),transparent_55%),radial-gradient(circle_at_bottom,_rgba(250,204,21,0.22),transparent_60%)] z-10 mix-blend-soft-light" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent z-10" />
+
               <img
                 src={post.image}
                 alt={post.title}
-                className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
+                className="relative z-0 w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover transform-gpu group-hover:scale-110 group-hover:rotate-[0.4deg] transition-transform duration-700 ease-out"
               />
             </motion.div>
 
@@ -808,6 +815,7 @@ const BlogDetail = () => {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="grid gap-6 sm:gap-8 md:grid-cols-2 mb-10 sm:mb-12"
             >
+              {/* Primary chart card */}
               <div className="bg-card border border-border/60 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 shadow-sm overflow-hidden">
                 <div className="mb-3 sm:mb-4">
                   <h3 className="text-sm sm:text-base font-semibold text-foreground">
@@ -817,6 +825,7 @@ const BlogDetail = () => {
                     {chartSettings.primarySubtitle}
                   </p>
                 </div>
+
                 {chartSettings.primaryType === "line" && (
                   <ChartContainer config={trafficChartConfig} className="w-full h-56 sm:h-64 md:h-72">
                     <LineChart data={trafficData} margin={{ top: 16, left: 0, right: 16, bottom: 8 }}>
@@ -850,6 +859,7 @@ const BlogDetail = () => {
                     </LineChart>
                   </ChartContainer>
                 )}
+
                 {chartSettings.primaryType === "bar" && (
                   <ChartContainer config={trafficChartConfig} className="w-full h-56 sm:h-64 md:h-72">
                     <BarChart data={trafficData} margin={{ top: 16, left: 0, right: 16, bottom: 8 }}>
@@ -878,6 +888,7 @@ const BlogDetail = () => {
                 )}
               </div>
 
+              {/* Secondary chart card */}
               <div className="bg-card border border-border/60 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 shadow-sm overflow-hidden">
                 <div className="mb-3 sm:mb-4">
                   <h3 className="text-sm sm:text-base font-semibold text-foreground">
@@ -887,6 +898,7 @@ const BlogDetail = () => {
                     {chartSettings.secondarySubtitle}
                   </p>
                 </div>
+
                 {chartSettings.secondaryType === "bar" && (
                   <ChartContainer config={engagementChartConfig} className="w-full h-56 sm:h-64 md:h-72">
                     <BarChart data={engagementData} margin={{ top: 16, left: 0, right: 16, bottom: 8 }}>
@@ -911,6 +923,7 @@ const BlogDetail = () => {
                     </BarChart>
                   </ChartContainer>
                 )}
+
                 {chartSettings.secondaryType === "line" && (
                   <ChartContainer config={trafficChartConfig} className="w-full h-56 sm:h-64 md:h-72">
                     <LineChart data={trafficData} margin={{ top: 16, left: 0, right: 16, bottom: 8 }}>
@@ -921,7 +934,7 @@ const BlogDetail = () => {
                       <Line
                         type="monotone"
                         dataKey="clicks"
-                        stroke="var(--color-clicks)"
+                        stroke={trafficChartConfig.clicks.color}
                         strokeWidth={2}
                         dot={false}
                         activeDot={{ r: 4 }}
@@ -929,6 +942,7 @@ const BlogDetail = () => {
                     </LineChart>
                   </ChartContainer>
                 )}
+
                 {chartSettings.secondaryType === "pie" && (
                   <ChartContainer config={engagementChartConfig} className="w-full h-56 sm:h-64 md:h-72">
                     <PieChart>
@@ -974,11 +988,13 @@ const BlogDetail = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -4 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="mb-10 sm:mb-12 rounded-xl sm:rounded-2xl border border-border/60 bg-card/60 p-5 sm:p-6 md:p-7 shadow-sm"
+              className="mb-10 sm:mb-12 rounded-xl sm:rounded-2xl border border-border/60 bg-gradient-to-br from-gold/5 via-card/80 to-sky-500/10 p-5 sm:p-6 md:p-7 shadow-[0_18px_45px_rgba(0,0,0,0.45)]"
             >
-              <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 text-gold">
-                How to Put This Article Into Action
+              <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 text-gold flex items-center gap-2">
+                <span className="inline-block h-6 w-6 rounded-full bg-gold/20 border border-gold/60 shadow-[0_0_20px_rgba(250,204,21,0.6)]" />
+                <span>How to Put This Article Into Action</span>
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-5 leading-relaxed">
                 Use this article as a practical playbook, not just theory. Start with one or two quick wins this

@@ -70,18 +70,30 @@ const CaseStudyDetail = () => {
 
               {/* Key Stats */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-                <div className="bg-gold/5 border border-gold/20 rounded-lg p-5 text-center">
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                  className="bg-gold/5 border border-gold/20 rounded-lg p-5 text-center shadow-sm shadow-gold/10"
+                >
                   <div className="text-3xl font-bold text-gold mb-1">{caseStudy.stats.costSaved}</div>
                   <div className="text-xs text-muted-foreground">Annual Savings</div>
-                </div>
-                <div className="bg-gold/5 border border-gold/20 rounded-lg p-5 text-center">
+                </motion.div>
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.02 }}
+                  className="bg-gold/5 border border-gold/20 rounded-lg p-5 text-center shadow-sm shadow-gold/10"
+                >
                   <div className="text-3xl font-bold text-gold mb-1">{caseStudy.stats.vaCount}</div>
                   <div className="text-xs text-muted-foreground">Team Size</div>
-                </div>
-                <div className="bg-gold/5 border border-gold/20 rounded-lg p-5 text-center">
+                </motion.div>
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.04 }}
+                  className="bg-gold/5 border border-gold/20 rounded-lg p-5 text-center shadow-sm shadow-gold/10"
+                >
                   <div className="text-3xl font-bold text-gold mb-1">{caseStudy.stats.timeframe}</div>
                   <div className="text-xs text-muted-foreground">Implementation</div>
-                </div>
+                </motion.div>
               </div>
             </div>
 
@@ -109,6 +121,58 @@ const CaseStudyDetail = () => {
               </div>
             </div>
 
+            {/* Implementation Overview */}
+            <div className="mb-10">
+              <h2 className="text-xl sm:text-2xl font-bold mb-3 text-foreground">
+                How We Implemented It
+              </h2>
+              <div className="bg-card border border-border rounded-lg p-5 sm:p-6 space-y-4">
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  We didn&apos;t just drop a virtual assistant into the business and hope for the best. The rollout
+                  followed a simple, structured plan so the internal team always knew what was happening and why.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-muted-foreground">
+                  <div className="bg-background/60 border border-border rounded-lg p-4">
+                    <h3 className="text-foreground font-semibold mb-2 text-sm">1. Discovery &amp; Playbook</h3>
+                    <p>Mapped out recurring tasks, tools, and communication standards so the VA could plug in smoothly.</p>
+                  </div>
+                  <div className="bg-background/60 border border-border rounded-lg p-4">
+                    <h3 className="text-foreground font-semibold mb-2 text-sm">2. Systems &amp; Training</h3>
+                    <p>Created SOPs, loom videos, and simple checklists so handover did not depend on memory.</p>
+                  </div>
+                  <div className="bg-background/60 border border-border rounded-lg p-4">
+                    <h3 className="text-foreground font-semibold mb-2 text-sm">3. Optimise &amp; Scale</h3>
+                    <p>Reviewed performance weekly, moved more work off the founder&apos;s plate, and added capacity.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* VA Responsibilities Snapshot */}
+            <div className="mb-10">
+              <h2 className="text-xl sm:text-2xl font-bold mb-3 text-foreground">
+                What the Virtual Assistants Handle Day to Day
+              </h2>
+              <div className="bg-card border border-border rounded-lg p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-muted-foreground">
+                <div className="space-y-1.5">
+                  <h3 className="text-foreground font-semibold mb-1 text-sm">Operations &amp; Admin</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Inbox and calendar management for key stakeholders.</li>
+                    <li>Updating CRMs, project boards, and shared tracking sheets.</li>
+                    <li>Preparing weekly summaries so leadership sees progress at a glance.</li>
+                  </ul>
+                </div>
+                <div className="space-y-1.5">
+                  <h3 className="text-foreground font-semibold mb-1 text-sm">Growth &amp; Client Support</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Coordinating client calls, follow-ups, and simple support requests.</li>
+                    <li>Helping with research, prospect list building, or reporting.</li>
+                    <li>Documenting new repeatable processes as the business evolves.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
             {/* Results Section */}
             <div className="mb-10">
               <h2 className="text-xl sm:text-2xl font-bold mb-4 text-foreground">
@@ -116,14 +180,16 @@ const CaseStudyDetail = () => {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {caseStudy.results.map((result, index) => (
-                  <div
+                  <motion.div
                     key={index}
-                    className="bg-card border border-border rounded-lg p-5"
+                    whileHover={{ y: -4, scale: 1.01 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                    className="bg-card border border-border rounded-lg p-5 shadow-sm hover:shadow-gold/20 hover:border-gold/50 transition-all duration-300"
                   >
                     <div className="text-3xl font-bold text-gold mb-2">{result.value}</div>
                     <div className="text-base font-semibold text-foreground mb-1">{result.metric}</div>
                     <div className="text-sm text-muted-foreground">{result.description}</div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
